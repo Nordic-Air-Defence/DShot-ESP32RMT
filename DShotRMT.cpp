@@ -72,11 +72,11 @@ DShotRMT::DShotRMT(gpio_num_t gpio, dshot_mode_t dshot_mode)
             .clk_src = RMT_CLK_SRC_DEFAULT,
             .resolution_hz = DSHOT_RMT_RESOLUTION_HZ,
             .mem_block_symbols = MAX_BLOCKS,
+            .intr_priority = 1,
             .flags{
                 .with_dma = true,
                 .io_loop_back = true,
-            },
-            .intr_priority = 1,
+            }            
         };
         ESP_ERROR_CHECK(rmt_new_rx_channel(&rmt_rx_channel_config, &rmt_rx_channel));
 
