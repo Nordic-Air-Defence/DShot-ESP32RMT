@@ -54,6 +54,9 @@ public:
     // The begin() function enalbes the DShotRMT class
     void begin();
 
+    // The end() function disables the DShotRMT class
+    void end();
+
     // Sends a DShot packet with a given throttle value (between 48 and 2047). (non-blocking)
     void sendThrottle(uint16_t throttle_value);
 

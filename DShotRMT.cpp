@@ -76,8 +76,7 @@ DShotRMT::DShotRMT(gpio_num_t gpio, dshot_mode_t dshot_mode)
             .flags{
                 .with_dma = true,
                 .io_loop_back = true,
-            }            
-        };
+            }};
         ESP_ERROR_CHECK(rmt_new_rx_channel(&rmt_rx_channel_config, &rmt_rx_channel));
 
         ESP_LOGI(TAG, "Register RX callback");
@@ -167,6 +166,15 @@ void DShotRMT::begin()
 
     ESP_LOGI(TAG, "Resetting and Arming ESC...");
     sendTicks(0, pdMS_TO_TICKS(DSHOT_ARM_DELAY));
+
+    ESP_LOGI(TAG, "Done!");
+}
+
+void DShotRMT::end()
+{
+    ESP_LOGI(TAG, "Disable RMT TX channel");
+    ESP_ERROR_CHECK(rmt_disable(rmt_tx_channel));
+    ESP_ERROR_CHECK(rmt_disable(rmt_rx_channel));
 
     ESP_LOGI(TAG, "Done!");
 }
